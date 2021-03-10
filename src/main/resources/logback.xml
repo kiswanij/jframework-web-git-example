@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Check full configurations documentation at: http://logback.qos.ch/manual/configuration.html -->
+<configuration info="false" scan="true" scanPeriod="60 seconds" packagingData="true">
+	<!-- <shutdownHook/> -->
+	<statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+	<contextName>Smart-Cloud</contextName>
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/jk.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>logs/jk-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<!-- each file should be at most 100MB, keep 30 days worth of history, but at most 10GB -->
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>10GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			 <pattern>%d [%thread] %level %mdc %logger{35} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- Levels are: TRACE, info, info, WARN, info, ALL or OFF -->
+	<logger name="com.jk" level="info" />
+
+	<logger name="org.springframework" level="info" />
+	<logger name="org.springframework.security.web" level="info" />
+	<logger name="com.jk.util.factory.spring" level="info" />
+	<logger name="org.hibernate" level="info" />
+	<logger name="log.org.jboss.logging" level="info" />
+
+	<logger name="javax.enterprise" level="info" />
+	<logger name="javax.faces" level="info" />
+	<logger name="org.primefaces" level="info" />
+	<logger name="com.sun.faces" level="info" />
+	<logger name="org.apache.catalina" level="info" />
+	<logger name="org.apache" level="info" />
+	<logger name="com.mchange" level="info" />
+	<logger name="org.omnifaces" level="info" />
+
+	<root level="warn">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</root>
+
+</configuration>

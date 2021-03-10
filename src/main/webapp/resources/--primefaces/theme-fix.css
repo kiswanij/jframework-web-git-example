@@ -1,0 +1,58 @@
+.ui-panelgrid .ui-panelgrid-header{
+	line-height: 25px;
+	font-size: 1em;
+}
+.ui-panelgrid .ui-panelgrid-cell{
+	padding:1px;
+}
+
+.ui-panelgrid .ui-panelgrid-cell label{
+	padding:5px 10px;
+}
+.ui-panelgrid .ui-panelgrid-cell input{
+	width:95%;
+	height: 100%;
+	float: left;
+}
+.ui-panelgrid .ui-panelgrid-cell  .ui-selectonemenu{
+	float: left;width: 85%;
+}
+.ui-panel .ui-panel-titlebar{
+	font-size: 1.6em;
+}
+.ui-panelgrid{
+	margin:auto;
+	border-radius: 10px;
+	border: 2px solid lightgray;
+	padding: 10px !important;
+}
+
+button{
+	padding:5px 20px !important;
+}
+.ui-menubar{
+	padding-left: 20px; 
+	font-size: 1em;
+}
+.ui-menubar .ui-menubar-options{
+	line-height: 30px;
+	margin-right: 20px;
+	font-size: 1em;
+	text-decoration: none!important;
+	font-weight: bold;
+}
+.ui-menubar .ui-menubar-options a{
+margin: 10px;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    opacity: 0.3; 
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    opacity: 0.3; 
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+        opacity: 0.3; 
+}

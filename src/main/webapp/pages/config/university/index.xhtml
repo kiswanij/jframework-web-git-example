@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/templates/default.xhtml">
+<ui:define name="page-title">University Management</ui:define>
+<ui:define name="contents">
+<h:form id="frmUniversity">
+    <p:messages />
+    <p:panelGrid columns="4" id="model" style="margin:auto">
+    <p:autoUpdate />
+    <f:facet name="header">#{msg.get('University')} Form</f:facet>
+      <p:outputLabel  value="#{msg.get('Name')}" for="Name"/>
+      <p:inputText type="text" id="Name"  value="#{mbUniversity.model.name}" required="true" disabled="#{mbUniversity.readOnlyMode}" readOnly="#{mbUniversity.readOnlyMode}" placeholder="Enter value"/>
+    
+    <f:facet name="footer">
+      <div align="center" style="height:30px">
+     <p:commandButton value="Add" action="#{mbUniversity.add}" rendered="#{mbUniversity.allowAdd}"  process="model" />
+     <p:commandButton value="Edit" action="#{mbUniversity.edit}"  rendered="#{mbUniversity.allowEdit}"  process="@this"/> 
+     <p:commandButton value="Save" action="#{mbUniversity.save}" rendered="#{mbUniversity.allowSave}"  process="model" />
+     <p:commandButton value="Delete" action="#{mbUniversity.delete}"  rendered="#{mbUniversity.allowDelete}"  process="@this"/>
+     <p:commandButton value="Reset" action="#{mbUniversity.reset}"  rendered="#{mbUniversity.allowReset}"  process="@this"/>
+     <p:commandButton value="Fill" action="#{mbUniversity.fill}"  rendered="#{mbUniversity.allowFill}"  process="@this"/>
+     <p:commandButton value="Cancel Edit" action="#{mbUniversity.cancelEdit()}"  rendered="#{mbUniversity.editMode}"  process="@this"/>
+      </div>
+    </f:facet>
+    </p:panelGrid>
+    <br/>
+    <p:dataTable value="#{mbUniversity.modelList}" var="model" rowKey="#{model.id}" 
+    paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" selectionMode="single" 
+    filteredValue="#{mbUniversity.filterList}" 
+    selection="#{mbUniversity.model}"  emptyMessage="" rowIndexVar="row">
+    <p:ajax event="rowSelect" update="@form:model" />
+    <p:autoUpdate />
+    <f:facet name="header">Universitys Data Table</f:facet>
+    <p:column headerText="#">#{row+1}</p:column>
+      <p:column headerText="#{msg.get('Name')}" sortBy="#{model.name}" filterBy="#{model.name}" filterMatchMode="contains">
+      <h:outputText value="#{model.name==null?'-':model.name}"  />
+      </p:column>
+    </p:dataTable>
+</h:form>
+</ui:define>
+</ui:composition>
+</html>

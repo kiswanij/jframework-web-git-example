@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="page-title">Author Management</ui:define>
+	<ui:define name="contents">
+		<h:form id="frmAuthor">
+			<p:messages />
+			<p:panelGrid columns="4" id="model" style="margin:auto">
+				<p:autoUpdate />
+				<f:facet name="header">#{msg.get('Author')} Form</f:facet>
+				<p:outputLabel value="#{msg.get('first name')}" for="FirstName" />
+				<p:inputText type="text" id="FirstName" value="#{mbAuthor.model.firstName}" required="true" disabled="#{mbAuthor.readOnlyMode}"
+					readOnly="#{mbAuthor.readOnlyMode}" placeholder="Enter value" />
+
+				<p:outputLabel value="#{msg.get('last name')}" for="LastName" />
+				<p:inputText type="text" id="LastName" value="#{mbAuthor.model.lastName}" required="true" disabled="#{mbAuthor.readOnlyMode}"
+					readOnly="#{mbAuthor.readOnlyMode}" placeholder="Enter value" />
+
+				<p:outputLabel value="#{msg.get('email')}" for="Email" />
+				<p:inputText type="email" id="Email" value="#{mbAuthor.model.email}" required="true" disabled="#{mbAuthor.readOnlyMode}"
+					readOnly="#{mbAuthor.readOnlyMode}" placeholder="Enter value" />
+
+				<p:outputLabel value="#{msg.get('University')}" for="University" />
+				<p:selectOneMenu value="#{mbAuthor.model.university}" id="University" required="true" disabled="#{mbAuthor.readOnlyMode}"
+					converter="omnifaces.SelectItemsConverter">
+					<f:selectItem itemLabel="" itemValue="#{null}" />
+					<f:selectItems value="#{mbUniversity.modelList}" var="ref" itemLabel="#{ref.name}" itemValue="#{ref}" />
+				</p:selectOneMenu>
+				<p:outputLabel value="#{msg.get('Department')}" for="Department" />
+				<p:selectOneMenu value="#{mbAuthor.model.department}" id="Department" required="true" disabled="#{mbAuthor.readOnlyMode}"
+					converter="omnifaces.SelectItemsConverter">
+					<f:selectItem itemLabel="" itemValue="#{null}" />
+					<f:selectItems value="#{mbDepartment.modelList}" var="ref" itemLabel="#{ref.name}" itemValue="#{ref}" />
+				</p:selectOneMenu>
+				<p:outputLabel value="#{msg.get('Phone')}" for="Phone" />
+				<p:inputText type="text" id="Phone" value="#{mbAuthor.model.phone}" disabled="#{mbAuthor.readOnlyMode}" readOnly="#{mbAuthor.readOnlyMode}"
+					placeholder="Enter value" />
+
+				<p:outputLabel value="#{msg.get('Mobile')}" for="Mobile" />
+				<p:inputText type="text" id="Mobile" value="#{mbAuthor.model.mobile}" disabled="#{mbAuthor.readOnlyMode}" readOnly="#{mbAuthor.readOnlyMode}"
+					placeholder="Enter value" />
+
+				<p:outputLabel value="#{msg.get('Profile')}" for="Profile" />
+				<p:inputText type="text" id="Profile" value="#{mbAuthor.model.profile}" disabled="#{mbAuthor.readOnlyMode}" readOnly="#{mbAuthor.readOnlyMode}"
+					placeholder="Enter value" />
+
+				<f:facet name="footer">
+					<div align="center" style="height: 30px">
+						<p:commandButton value="Add" action="#{mbAuthor.add}" rendered="#{mbAuthor.allowAdd}" process="model" />
+						<p:commandButton value="Edit" action="#{mbAuthor.edit}" rendered="#{mbAuthor.allowEdit}" process="@this" />
+						<p:commandButton value="Save" action="#{mbAuthor.save}" rendered="#{mbAuthor.allowSave}" process="model" />
+						<p:commandButton value="Delete" action="#{mbAuthor.delete}" rendered="#{mbAuthor.allowDelete}" process="@this" />
+						<p:commandButton value="Reset" action="#{mbAuthor.reset}" rendered="#{mbAuthor.allowReset}" process="@this" />
+						<p:commandButton value="Fill" action="#{mbAuthor.fill}" rendered="#{mbAuthor.allowFill}" process="@this" />
+						<p:commandButton value="Cancel Edit" action="#{mbAuthor.cancelEdit()}" rendered="#{mbAuthor.editMode}" process="@this" />
+					</div>
+				</f:facet>
+			</p:panelGrid>
+			<br />
+			<p:dataTable value="#{mbAuthor.modelList}" var="model" rowKey="#{model.id}" paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom" selectionMode="single" filteredValue="#{mbAuthor.filterList}" selection="#{mbAuthor.model}" emptyMessage=""
+				rowIndexVar="row">
+				<p:ajax event="rowSelect" update="@form:model" />
+				<p:autoUpdate />
+				<f:facet name="header">Authors Data Table</f:facet>
+				<p:column headerText="#">#{row+1}</p:column>
+				<p:column headerText="#{msg.get('first name')}" sortBy="#{model.firstName}" filterBy="#{model.firstName}" filterMatchMode="contains">
+					<h:outputText value="#{model.firstName==null?'-':model.firstName}" />
+				</p:column>
+				<p:column headerText="#{msg.get('last name')}" sortBy="#{model.lastName}" filterBy="#{model.lastName}" filterMatchMode="contains">
+					<h:outputText value="#{model.lastName==null?'-':model.lastName}" />
+				</p:column>
+				<p:column headerText="#{msg.get('email')}" sortBy="#{model.email}" filterBy="#{model.email}" filterMatchMode="contains">
+					<h:outputText value="#{model.email==null?'-':model.email}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
