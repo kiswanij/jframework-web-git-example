@@ -13,7 +13,7 @@ public class DataAccess {
 	private static final String ID_FIELD_NAME = "id";
 	private static JKGitWrapper gw = new JKGitWrapper();
 	
-	private static Git git= gw.password(JKConfig.getDefaultInstance().getProperty("git-password2")).cloneRepo();
+	private static Git git= gw.password(JKConfig.getDefaultInstance().getProperty("git-password-plain")).cloneRepo();
 
 	/////////////////////////////////////////
 	public <T> void insert(T record) {
