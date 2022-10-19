@@ -1,13 +1,14 @@
 package com.app.person;
 
-import java.util.*;
+import java.util.List;
+import java.util.Vector;
 
 import org.eclipse.jgit.api.Git;
 
-import com.jk.util.JKIOUtil;
-import com.jk.util.JKObjectUtil;
-import com.jk.util.activedirectory.JKGitWrapper;
-import com.jk.util.config.JKConfig;
+import com.jk.core.config.JKConfig;
+import com.jk.core.scm.JKGitWrapper;
+import com.jk.core.util.JKIOUtil;
+import com.jk.core.util.JKObjectUtil;
 
 public class DataAccess {
 	private static final String ID_FIELD_NAME = "id";
@@ -78,7 +79,7 @@ public class DataAccess {
 	protected <T> void save(Class<T> clas, List<T> list) {
 		String contents = JKObjectUtil.toJson(list);
 		JKIOUtil.writeDataToFile(contents, getFilePath(clas));
-		gw.addCommitPush(git);
+		gw.addCommitPush();
 	}
 
 	/////////////////////////////////////////
