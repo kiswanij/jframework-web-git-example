@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.UUID;
 import java.util.Vector;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import com.jk.web.faces.mb.JKWebController;
 
-import com.jk.web.faces.mb.JKManagedBean;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 
-@ManagedBean(name = "controller")
+@Named("controller")
 @ViewScoped
-public class Controller extends JKManagedBean {
+public class Controller extends JKWebController {
 	DataAccess da = new DataAccess();
 	Model model;
 	List<Model> modelList;
@@ -35,11 +35,11 @@ public class Controller extends JKManagedBean {
 
 	public String update() {
 		da.update(model);
-		String id=getModel().getId();
+		String id = getModel().getId();
 		success("Updated Successfully");
 		refresh();
-		//to ensure getting updated version from DB
-		this.model=da.find(Model.class, id);
+		// to ensure getting updated version from DB
+		this.model = da.find(Model.class, id);
 		return null;
 	}
 
