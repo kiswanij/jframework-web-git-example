@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.Vector;
 
-import com.jk.web.faces.mb.JKWebController;
+import com.jk.web.faces.controllers.JKWebController;
 
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
